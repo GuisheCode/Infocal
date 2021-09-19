@@ -2,7 +2,7 @@
 
 //if logged in redirect to members page
 if ($user->is_logged_in()){ 
-	header('Location: memberpage.php'); 
+	header('Location: docente.php'); 
 	exit(); 
 }
 
