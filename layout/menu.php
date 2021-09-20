@@ -8,7 +8,7 @@
             <nav class="navi">
                 <div class="logo">Infocal</div>
                 <div class="nav-items">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Inicio</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Blogs</a></li>
                     <li><a href="#">Contact</a></li>
@@ -45,25 +45,25 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav__logo">
+                    <a href="admin.php" class="nav__logo">
                         <i class='bx bx-layer nav__logo-icon'></i>
                         <span class="nav__logo-name">Bedimcode</span>
                     </a>
 
                     <div class="nav__list">
-                        <a href="#" class="nav__link active">
+                        <a href="carreras.php" class="nav__link active">
                         <i class='bx bx-grid-alt nav__icon' ></i>
-                            <span class="nav__name">Dashboard</span>
+                            <span class="nav__name">Carreras</span>
                         </a>
 
-                        <a href="#" class="nav__link">
+                        <a href="docentes.php" class="nav__link">
                             <i class='bx bx-user nav__icon' ></i>
-                            <span class="nav__name">Users</span>
+                            <span class="nav__name">Docentes</span>
                         </a>
                         
-                        <a href="#" class="nav__link">
+                        <a href="materias.php" class="nav__link">
                             <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
+                            <span class="nav__name">Materias</span>
                         </a>
 
                         <a href="#" class="nav__link">

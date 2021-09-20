@@ -9,7 +9,7 @@ if (! $user->is_logged_in()){
 }
 
 //define page title
-$title = 'Members Page';
+$title = 'Materias';
 
 //include header template
 require('layout/header.php'); 
