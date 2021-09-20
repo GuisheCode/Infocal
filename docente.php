@@ -53,37 +53,84 @@ $update = $seleccionTablaMaterias->where("idMaterias","=",1)->update(["materia"=
 $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 
 /***************** Muestra los registros afectados ******************/
-echo "FILAS ACTUALIZADAS: " . $update . " ELIMINADOS: " . $delete;
+// echo "FILAS ACTUALIZADAS: " . $update . " ELIMINADOS: " . $delete;
 
 
+?>
+<div class="fila">
+<?php
+$seleccionTablaAulas =new Crud("aulas");
+$seleccionTablaCarreras =new Crud("carreras");
+$seleccionTablaDocentes =new Crud("docentes");
 $selectAll=$seleccionTablaMaterias->get();
+
 $fechaHoy=date('Ymd');
+$hora =210000;
+$diferenciaHoraInicio=200000;
+$diferenciaHoraFin=-220000;
 foreach ($selectAll as $key) {
 	$valorStringInicio = $key['fechaInicio'];
 	$valorEnteroInicio=str_replace("-","",$valorStringInicio);
 	$diferenciaInicio = $fechaHoy-$valorEnteroInicio;
 
 	$valorStringFin = $key['fechaFin'];
-	$valorEnteroFin=str_replace("-","",$valorStringFin);
+	$valorEnteroFin = str_replace("-","",$valorStringFin);
 	$diferenciaFin = $fechaHoy-$valorEnteroFin;
-	if ($diferenciaInicio>=0 && $diferenciaFin<=0){
+
+	// $valorHoraStringInicio = $key['horaInicio'];
+	// $valorHoraEnteroInicio=str_replace(":","",$valorHoraStringInicio);
+	// $diferenciaHoraInicio = $hora-$valorHoraEnteroInicio;
+
+	// $valorHoraStringFin = $key['horaFin'];
+	// $valorHoraEnteroFin=str_replace(":","",$valorHoraStringFin);
+	// $diferenciaHoraFin = $hora-$valorHoraEnteroFin;
+
+	echo $key['horaFin'];
+	
+
+	if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
+		$idMaterias = $key['idMaterias'];
+		$idDocente = $key['idDocente'];
+		$idCarrera = $key['idCarrera'];
+		$idAula = $key['idAula'];
+		$selectAllAulas=$seleccionTablaAulas->where("idAula","=",$idAula)->get();
+		$selectAllDocentes=$seleccionTablaDocentes->where("idDocente","=",$idDocente)->get();
+		$selectAllCarreras=$seleccionTablaCarreras->where("idCarrera","=",$idCarrera)->get();
+		foreach ($selectAllDocentes as $valoresDocentes) {	
+			foreach ($selectAllCarreras as $valoresCarreras) {
+				foreach ($selectAllAulas as $valoresAulas) {
 		?>
+			<div class="columna">
+				<div class="card">
+					<h3><?php echo $key['materia'] ?></h3>
+					<p>Docente: <?php echo $valoresDocentes['nombre'] ?></p>
+					<p>Carrera: <?php echo $valoresCarreras['carrera'] ?></p>
+					<p>Aula: <?php echo $valoresAulas['aula'] ?></p>
+				</div>
+			</div>
 		<br>
-		<h6>ID Materia: <?php echo $key['idMaterias'] ?></h6>
-		<h6>Materia: <?php echo $key['materia'] ?></h6>
-		<h6>ID Docente: <?php echo $key['idDocente'] ?></h6>
-		<h6>ID Carrera: <?php echo $key['idCarrera'] ?></h6>
-		<?php
+<?php		
+				}
+			}
+		}
 	}
 }
-
-
-
-
 ?>
+<?php 
+		
+?>
+</div>
 <div class="">		
 				<h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
 				<?php
+				$a = date('Gis');
+				$b = 030000;
+				
+				$c = $a - $b;
+				echo $a ."<br>";
+				echo $b ."<br>";
+				echo $c ."<br>";
+				echo $a ."<br>";
 				echo $_SESSION['memberID']."<br>";
 				echo date('Y/m/d G:i:s  l', time());
 				echo date('n');
