@@ -27,9 +27,9 @@ $seleccionTablaMaterias = new Crud("materias");
 //  Pasamos los datos a la funcion, que nos devuelve un array con los datos que pedimos
 $whereAndWhere = $seleccionTablaMaterias->where("idDocente","=",2)->where("idCarrera","=",1)->get();
 //  Muestra el array con su tipo de datos
-echo "<pre>";
-var_dump($whereAndWhere);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($whereAndWhere);
+// echo "</pre>";
 //  Recorremos todos los datos devueltos por la consulta y los guardamos en variables separadas
 foreach($whereAndWhere as $index){
     $idMaterias = $index['idMaterias'];
@@ -40,11 +40,11 @@ foreach($whereAndWhere as $index){
 
 /***************** PARA CONSULTAR TODOS LOS DATOS DE UNA TABLA ******************/
 //  Consulta todos los datos de una tabla
-$selectAll=$seleccionTablaMaterias->get();
+// $selectAll=$seleccionTablaMaterias->get();
 //  Muestra el array con toda la consulta devuelta
-echo "<pre>";
-var_dump($selectAll);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($selectAll);
+// echo "</pre>";
 
 /***************** PARA ACTUALIZAR UNA TABLA ******************/
 $update = $seleccionTablaMaterias->where("idMaterias","=",1)->update(["materia"=>"BD","idDocente"=>1,"idCarrera"=>1]);
@@ -55,16 +55,46 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 /***************** Muestra los registros afectados ******************/
 echo "FILAS ACTUALIZADAS: " . $update . " ELIMINADOS: " . $delete;
 
+
+$selectAll=$seleccionTablaMaterias->get();
+$fechaHoy=date('Ymd');
+foreach ($selectAll as $key) {
+	$valorStringInicio = $key['fechaInicio'];
+	$valorEnteroInicio=str_replace("-","",$valorStringInicio);
+	$diferenciaInicio = $fechaHoy-$valorEnteroInicio;
+
+	$valorStringFin = $key['fechaFin'];
+	$valorEnteroFin=str_replace("-","",$valorStringFin);
+	$diferenciaFin = $fechaHoy-$valorEnteroFin;
+	if ($diferenciaInicio>=0 && $diferenciaFin<=0){
+		?>
+		<br>
+		<h6>ID Materia: <?php echo $key['idMaterias'] ?></h6>
+		<h6>Materia: <?php echo $key['materia'] ?></h6>
+		<h6>ID Docente: <?php echo $key['idDocente'] ?></h6>
+		<h6>ID Carrera: <?php echo $key['idCarrera'] ?></h6>
+		<?php
+	}
+}
+
+
+
+
 ?>
 <div class="">		
 				<h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
 				<?php
 				echo $_SESSION['memberID']."<br>";
-				echo date('d/m/Y h:i:s a l', time());
+				echo date('Y/m/d G:i:s  l', time());
 				echo date('n');
+				echo $fechaHoy-1;
+
 				?>
 				<p><a href='logout.php'>Logout</a></p>
 		</div>
+
+
+
 	</div>
 </div>
 <?php 
