@@ -9,7 +9,7 @@ if (! $user->is_logged_in()){
 }
 
 //define page title
-$title = 'Members Page';
+$title = 'Docentes';
 
 //include header template
 require('layout/header.php'); 
@@ -60,7 +60,8 @@ echo "FILAS ACTUALIZADAS: " . $update . " ELIMINADOS: " . $delete;
 				<h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
 				<?php
 				echo $_SESSION['memberID']."<br>";
-				echo date('d/m/Y h:i:s a', time());
+				echo date('d/m/Y h:i:s a l', time());
+				echo date('n');
 				?>
 				<p><a href='logout.php'>Logout</a></p>
 		</div>

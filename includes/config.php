@@ -4,6 +4,7 @@ session_start();
 
 //set timezone
 // date_default_timezone_set('Europe/London');
+setlocale(LC_ALL, 'es_ES');
 date_default_timezone_set('America/La_Paz');
 //database credentials
 define('DBHOST','localhost');
