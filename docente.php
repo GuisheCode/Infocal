@@ -58,6 +58,9 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 
 ?>
 <div class="fila">
+	<br>
+	<h4 class="tituloDocente">Mis clases hoy</h4>
+	<hr>
 <?php
 $seleccionTablaAulas =new Crud("aulas");
 $seleccionTablaCarreras =new Crud("carreras");
@@ -65,9 +68,7 @@ $seleccionTablaDocentes =new Crud("docentes");
 $selectAll=$seleccionTablaMaterias->get();
 
 $fechaHoy=date('Ymd');
-$hora =210000;
-$diferenciaHoraInicio=200000;
-$diferenciaHoraFin=-220000;
+$hora =date('Gis');
 foreach ($selectAll as $key) {
 	$valorStringInicio = $key['fechaInicio'];
 	$valorEnteroInicio=str_replace("-","",$valorStringInicio);
@@ -76,18 +77,14 @@ foreach ($selectAll as $key) {
 	$valorStringFin = $key['fechaFin'];
 	$valorEnteroFin = str_replace("-","",$valorStringFin);
 	$diferenciaFin = $fechaHoy-$valorEnteroFin;
+	$valorHoraStringInicio = $key['horaInicio'];
+	$valorHoraEnteroInicio=str_replace(":","",$valorHoraStringInicio);
+	$diferenciaHoraInicio = $hora-$valorHoraEnteroInicio;
 
-	// $valorHoraStringInicio = $key['horaInicio'];
-	// $valorHoraEnteroInicio=str_replace(":","",$valorHoraStringInicio);
-	// $diferenciaHoraInicio = $hora-$valorHoraEnteroInicio;
-
-	// $valorHoraStringFin = $key['horaFin'];
-	// $valorHoraEnteroFin=str_replace(":","",$valorHoraStringFin);
-	// $diferenciaHoraFin = $hora-$valorHoraEnteroFin;
-
-	echo $key['horaFin'];
+	$valorHoraStringFin = $key['horaFin'];
+	$valorHoraEnteroFin=str_replace(":","",$valorHoraStringFin);
+	$diferenciaHoraFin = $hora-$valorHoraEnteroFin;
 	
-
 	if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
 		$idMaterias = $key['idMaterias'];
 		$idDocente = $key['idDocente'];
@@ -102,13 +99,17 @@ foreach ($selectAll as $key) {
 		?>
 			<div class="columna">
 				<div class="card">
-					<h3><?php echo $key['materia'] ?></h3>
-					<p>Docente: <?php echo $valoresDocentes['nombre'] ?></p>
-					<p>Carrera: <?php echo $valoresCarreras['carrera'] ?></p>
-					<p>Aula: <?php echo $valoresAulas['aula'] ?></p>
+				<div class="dentro">
+					<br>
+					<i class="fas fa-users iconoTarjeta"></i>
+					<h4 class="tituloTarjeta">Aula: <b><?php echo $valoresAulas['aula'] ?></b></h4>
+					<h5 class="subTarjeta">Materia: <?php echo $key['materia'] ?></h5>
+					<br><br>
+					<h5 class="subTarjeta">Carrera: <?php echo $valoresCarreras['carrera'] ?></h5>
+					<h5 class="subTarjeta">Docente: <?php echo $valoresDocentes['nombre'] ?></h5>
+					</div>
 				</div>
 			</div>
-		<br>
 <?php		
 				}
 			}
@@ -123,18 +124,7 @@ foreach ($selectAll as $key) {
 <div class="">		
 				<h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
 				<?php
-				$a = date('Gis');
-				$b = 030000;
-				
-				$c = $a - $b;
-				echo $a ."<br>";
-				echo $b ."<br>";
-				echo $c ."<br>";
-				echo $a ."<br>";
-				echo $_SESSION['memberID']."<br>";
-				echo date('Y/m/d G:i:s  l', time());
-				echo date('n');
-				echo $fechaHoy-1;
+				//  
 
 				?>
 				<p><a href='logout.php'>Logout</a></p>

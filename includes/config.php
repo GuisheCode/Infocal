@@ -62,7 +62,7 @@ class Conexion {
                     . "dbname={$BASE_DATOS};charset={$CODIFICACION}";
             //Se crea la conexión.
             $this->conexion = new PDO($url, $USUARIO, $CLAVE);
-            echo "CONECTADO";
+            // echo "";
             return $this->conexion;
         } catch (Exception $exc) {
             echo "NO SE PUDO CONECTAR";
