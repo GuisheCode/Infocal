@@ -37,15 +37,40 @@ require('layout/footer.php');
 			<div class="panel-body">
 				<form method="post">
 					<input type="text" name="carrera" placeholder="Ingrese el nombre de la materia">
+					<select name="id-aula" class="form-control" required>
+						<option value="" selected>Seleccione la Carrera</option>
+					</select>
 					<select name="id-docente" required>
-						<option value="" selected>Seleccione al docente</option>
-						<option value="Tecnico Superior">??</option>
-						<option value="Tecnico Medio">??</option>
-						<option value="Carrera Corta">??</option>
+						<option value="" selected>Seleccione al Docente</option>
 					</select>
 					<select name="id-aula" class="form-control" required>
 						<option value="" selected>Seleccione el Aula</option>
 					</select>
+
+					<p>
+					<div id="contenedor">
+						<div>
+						<p>Indique la fecha Inicio</p>
+							<input type="date">
+						</div>
+						<div>
+						<p>Indique la fecha Fin</p>
+							<input type="date">
+						</div>
+					</div>
+					</p>
+					<p>
+					<div id="contenedor">
+						<div>
+						<p>Indique la hora Inicio</p>
+							<input type="time">
+						</div>
+						<div>
+						<p>Indique la hora Fin</p>
+							<input type="time">
+						</div>
+					</div>
+					</p>
 					<p><input type="submit" value="Agregar" class="btn btn-primary"></p>
 				</form>
 			</div>
