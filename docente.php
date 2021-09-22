@@ -65,6 +65,7 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 $seleccionTablaAulas =new Crud("aulas");
 $seleccionTablaCarreras =new Crud("carreras");
 $seleccionTablaDocentes =new Crud("docentes");
+$seleccionTablaRecursos =new Crud("recursos");
 $selectAll=$seleccionTablaMaterias->get();
 
 $fechaHoy=date('Ymd');
@@ -77,13 +78,14 @@ foreach ($selectAll as $key) {
 	$valorStringFin = $key['fechaFin'];
 	$valorEnteroFin = str_replace("-","",$valorStringFin);
 	$diferenciaFin = $fechaHoy-$valorEnteroFin;
-	$valorHoraStringInicio = $key['horaInicio'];
-	$valorHoraEnteroInicio=str_replace(":","",$valorHoraStringInicio);
-	$diferenciaHoraInicio = $hora-$valorHoraEnteroInicio;
 
-	$valorHoraStringFin = $key['horaFin'];
-	$valorHoraEnteroFin=str_replace(":","",$valorHoraStringFin);
-	$diferenciaHoraFin = $hora-$valorHoraEnteroFin;
+	$horaInicioString = $key['horaInicio'];
+	$horaInicioEntero = str_replace(":","",$horaInicioString);
+	$diferenciaHoraInicio = $hora-$horaInicioEntero;
+
+	$horaFinString = $key['horaFin'];
+	$horaFinEntero=str_replace(":","",$horaFinString);
+	$diferenciaHoraFin = $hora-$horaFinEntero;
 	
 	if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
 		$idMaterias = $key['idMaterias'];
@@ -93,9 +95,11 @@ foreach ($selectAll as $key) {
 		$selectAllAulas=$seleccionTablaAulas->where("idAula","=",$idAula)->get();
 		$selectAllDocentes=$seleccionTablaDocentes->where("idDocente","=",$idDocente)->get();
 		$selectAllCarreras=$seleccionTablaCarreras->where("idCarrera","=",$idCarrera)->get();
+		$selectAllRecursos=$seleccionTablaRecursos->where("idMateria","=",$idMaterias)->get();
 		foreach ($selectAllDocentes as $valoresDocentes) {	
 			foreach ($selectAllCarreras as $valoresCarreras) {
 				foreach ($selectAllAulas as $valoresAulas) {
+					
 		?>
 			<div class="columna">
 				<div class="card">
@@ -103,14 +107,21 @@ foreach ($selectAll as $key) {
 					<br>
 					<i class="fas fa-users iconoTarjeta"></i>
 					<h4 class="tituloTarjeta">Aula: <b><?php echo $valoresAulas['aula'] ?></b></h4>
-					<h5 class="subTarjeta">Materia: <?php echo $key['materia'] ?></h5>
-					<br><br>
-					<h5 class="subTarjeta">Carrera: <?php echo $valoresCarreras['carrera'] ?></h5>
-					<h5 class="subTarjeta">Docente: <?php echo $valoresDocentes['nombre'] ?></h5>
+					<h5 class="subtituloTarjeta">Materia: <i><?php echo $key['materia'] ?></i></h5>
 					</div>
+					<h5 class="subTarjeta">Carrera: <b><i><?php echo $valoresCarreras['carrera'] ?></i></b></h5>
+					<h5 class="subTarjeta">Docente: <b><i><?php echo $valoresDocentes['nombre'] ?></i></b></h5>
+					
+					<h5 class="subTarjeta">Recurso(s):</h5>
+					<?php foreach ($selectAllRecursos as $valoresRecursos) {?> 
+						<?php echo "<h5 class='subTarjeta'><b><i>- ".$valoresRecursos['recurso']."</i></b></h5>"?>
+					<?php
+					}
+					?>
 				</div>
 			</div>
 <?php		
+					
 				}
 			}
 		}
