@@ -72,6 +72,14 @@ require('layout/footer.php');
 					<p>Seleccione al docente</p>
 					<select name="id" class="form-control" required>
 						<option value selected></option>
+						<?php 
+						$seleccionTablaMaterias = new Crud("docentes");
+						$whereAndWhere = $seleccionTablaMaterias->get();
+						foreach($whereAndWhere as $index){
+							$value1 = $echo['idDocentes'];
+							$value2 = $echo['nombre'];
+						}
+						?>
 					</select>
 					<input type="submit" name="del" value="Eliminar" class="btn btn-primary">
 				</form>
@@ -90,7 +98,7 @@ require('layout/footer.php');
 				<form name="form" method="post">
 					<p>Seleccione el aula</p>
 					<select name="id" class="form-control" required>
-						<option value selected><h1>cualquier cosa</h1></option>
+						<option value selected></option>
 						
 					</select>
 					<input type="submit" name="del" value="Eliminar" class="btn btn-primary">

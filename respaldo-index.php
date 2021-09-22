@@ -69,4 +69,16 @@ echo "FILAS ACTUALIZADAS: " . $update . " ELIMINADOS: " . $delete;
 <?php 
 //include header template
 require('layout/footer.php'); 
+
+//insertar
+$crud = new Crud("usuario");
+$id = $crud->insert([
+    "nombres" => "John",
+    "apellidos" => "Smith",
+    "edad" => 18,
+    "correo" => "jhon@gmail.com",
+    "telefono" => "123",
+    "fecha_registro" => date("Y-m-d H:i:s")
+        ]);
+
 ?>
