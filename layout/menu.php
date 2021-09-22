@@ -8,7 +8,7 @@
             <nav class="navi">
                 <div class="logo">Infocal</div>
                 <div class="nav-items">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Conferencias</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Blogs</a></li>
                     <li><a href="#">Contact</a></li>
@@ -51,9 +51,9 @@
                     </a>
 
                     <div class="nav__list">
-                        <a href="#" class="nav__link active">
+                        <a href="docente.php" class="nav__link">
                         <i class='bx bx-grid-alt nav__icon' ></i>
-                            <span class="nav__name">Dashboard</span>
+                            <span class="nav__name">Docente</span>
                         </a>
 
                         <a href="#" class="nav__link">
@@ -61,9 +61,9 @@
                             <span class="nav__name">Users</span>
                         </a>
                         
-                        <a href="#" class="nav__link">
+                        <a href="conferencias.php" class="nav__link active">
                             <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
+                            <span class="nav__name">Conferencias</span>
                         </a>
 
                         <a href="#" class="nav__link">

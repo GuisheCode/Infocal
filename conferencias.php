@@ -9,7 +9,7 @@ if (! $user->is_logged_in()){
 }
 
 //define page title
-$title = 'Docentes';
+$title = 'Conferencias';
 
 //include header template
 require('layout/header.php'); 
@@ -23,7 +23,7 @@ require('layout/menu.php');
 /***************** PARA CONSULTAR ALGUNOS DATOS DE UNA TABLA ******************/
 //  SELECT * FROM tablaMaterias WHERE AND WHERE
 //  Creamos objeto para utilizar con la tabla "materias"
-$seleccionTablaMaterias = new Crud("materias");
+$seleccionTablaMaterias = new Crud("conferencias");
 //  Pasamos los datos a la funcion, que nos devuelve un array con los datos que pedimos
 $whereAndWhere = $seleccionTablaMaterias->where("idDocente","=",2)->where("idCarrera","=",1)->get();
 //  Muestra el array con su tipo de datos
@@ -59,45 +59,34 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 ?>
 <div class="fila">
 	<br>
-	<h4 class="tituloDocente">Mis clases hoy</h4>
+	<h4 class="tituloDocente">Conferencias y eventos</h4>
 	<hr>
 <?php
-$seleccionTablaAulas =new Crud("aulas");
-$seleccionTablaCarreras =new Crud("carreras");
-$seleccionTablaDocentes =new Crud("docentes");
-$seleccionTablaRecursos =new Crud("recursos");
-$selectAll=$seleccionTablaMaterias->get();
+$seleccionTablaAulas =new Crud("conferencias");
+$selectAll=$seleccionTablaAulas->get();
 
-$fechaHoy=date('Ymd');
-$hora =date('Gis');
+//$fechaHoy=date('Ymd');
+//$hora =date('Gis');
 foreach ($selectAll as $key) {
-	$valorStringInicio = $key['fechaInicio'];
-	$valorEnteroInicio=str_replace("-","",$valorStringInicio);
-	$diferenciaInicio = $fechaHoy-$valorEnteroInicio;
+	//$valorStringInicio = $key['fechaInicio'];
+	//$valorEnteroInicio=str_replace("-","",$valorStringInicio);
+	//$diferenciaInicio = $fechaHoy-$valorEnteroInicio;
 
-	$valorStringFin = $key['fechaFin'];
-	$valorEnteroFin = str_replace("-","",$valorStringFin);
-	$diferenciaFin = $fechaHoy-$valorEnteroFin;
-
-	$horaInicioString = $key['horaInicio'];
-	$horaInicioEntero = str_replace(":","",$horaInicioString);
-	$diferenciaHoraInicio = $hora-$horaInicioEntero;
-
-	$horaFinString = $key['horaFin'];
-	$horaFinEntero=str_replace(":","",$horaFinString);
-	$diferenciaHoraFin = $hora-$horaFinEntero;
+	//$valorStringFin = $key['fechaFin'];
+	//$valorEnteroFin = str_replace("-","",$valorStringFin);
+	//$diferenciaFin = $fechaHoy-$valorEnteroFin;
 	
-	if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
-		$idMaterias = $key['idMaterias'];
-		$idDocente = $key['idDocente'];
-		$idCarrera = $key['idCarrera'];
-		$idAula = $key['idAula'];
-		$selectAllAulas=$seleccionTablaAulas->where("idAula","=",$idAula)->get();
-		$selectAllDocentes=$seleccionTablaDocentes->where("idDocente","=",$idDocente)->get();
-		$selectAllCarreras=$seleccionTablaCarreras->where("idCarrera","=",$idCarrera)->get();
-		$selectAllRecursos=$seleccionTablaRecursos->where("idMateria","=",$idMaterias)->get();
-		foreach ($selectAllDocentes as $valoresDocentes) {	
-			foreach ($selectAllCarreras as $valoresCarreras) {
+	//if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
+		//$idMaterias = $key['idMaterias'];
+		//$idDocente = $key['idDocente'];
+		//$idCarrera = $key['idCarrera'];
+		$idAula = $key['idconferencia'];
+		$selectAllAulas=$seleccionTablaAulas->where("idconferencia","=",$idAula)->get();
+		//$selectAllDocentes=$seleccionTablaDocentes->where("idDocente","=",$idDocente)->get();
+		//$selectAllCarreras=$seleccionTablaCarreras->where("idCarrera","=",$idCarrera)->get();
+		//$selectAllRecursos=$seleccionTablaRecursos->where("idMateria","=",$idMaterias)->get();
+		//foreach ($selectAllDocentes as $valoresDocentes) {	
+			//foreach ($selectAllCarreras as $valoresCarreras) {
 				foreach ($selectAllAulas as $valoresAulas) {
 					
 		?>
@@ -105,27 +94,23 @@ foreach ($selectAll as $key) {
 				<div class="card">
 				<div class="dentro">
 					<br>
-					<i class="fas fa-users iconoTarjeta"></i>
-					<h4 class="tituloTarjeta">Aula: <b><?php echo $valoresAulas['aula'] ?></b></h4>
-					<h5 class="subtituloTarjeta">Materia: <i><?php echo $key['materia'] ?></i></h5>
+					<i class="fas fa-chalkboard-teacher iconoTarjeta"></i>
+					<h4 class="tituloTarjeta"><b><?php echo $valoresAulas['nombre'] ?></b></h4>
+					<h5 class="subtituloTarjeta">Docente: <i><?php echo $valoresAulas['docente'] ?></i></h5>
 					</div>
-					<h5 class="subTarjeta">Carrera: <b><i><?php echo $valoresCarreras['carrera'] ?></i></b></h5>
-					<h5 class="subTarjeta">Docente: <b><i><?php echo $valoresDocentes['nombre'] ?></i></b></h5>
-					
-					<h5 class="subTarjeta">Recurso(s):</h5>
-					<?php foreach ($selectAllRecursos as $valoresRecursos) {?> 
-						<?php echo "<h5 class='subTarjeta'><b><i>- ".$valoresRecursos['recurso']."</i></b></h5>"?>
-					<?php
-					}
-					?>
+					<h5 class="subTarjeta">Fecha Inicio: <b><i><?php echo $valoresAulas['fechaini'] ?></i></b></h5>
+					<h5 class="subTarjeta">Fecha Final: <b><i><?php echo $valoresAulas['fechafin'] ?></i></b></h5>
+					<h5 class="subTarjeta">Descripción: <b><i><?php echo $valoresAulas['descripcion'] ?></i></b></h5>
+					<h5 class="subTarjeta">Asistencia: <b><i><?php echo $valoresAulas['asistencia'] ?></i></b></h5>
+										
 				</div>
 			</div>
 <?php		
 					
 				}
-			}
-		}
-	}
+			//}
+		//}
+	//}
 }
 ?>
 <?php 
