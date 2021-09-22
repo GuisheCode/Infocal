@@ -129,14 +129,30 @@ foreach ($selectAll as $key) {
 }
 ?>
 <?php 
-		
 ?>
 </div>
+
+
+
+<form action="">
+<label for="recurso">
+	<span>Recurso</span>
+	<input type="text" id="recurso" placeholder="Recurso">
+</label>
+<label for="idMateria">
+	<span>ID Materia</span>
+	<input type="text" id="idMateria" placeholder="ID Materia">
+</label>
+<button type="button" id="enviar">Enviar</button>
+</form>
+<br>
+<div id="respuesta"></div>
+
+
+
 <div class="">		
 				<h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
 				<?php
-				//  
-
 				?>
 				<p><a href='logout.php'>Logout</a></p>
 		</div>
