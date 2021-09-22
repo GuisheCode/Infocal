@@ -17,6 +17,11 @@ require('layout/menu.php');
 
 //include header template
 require('layout/footer.php');
+
+//--------
+$seleccionTablaCarreras = new Crud("carreras");
+$seleccionTablaJefecarrera = new Crud("jefecarrera");
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +41,7 @@ require('layout/footer.php');
 		<div class="panel panel-primary">
 			<div class="panel-body">
 				<form method="post">
-					<input type="text" name="carrera" placeholder="Ingrese el nombre de la Carrera">
+					<input type="text" name="inputCarrera" placeholder="Ingrese el nombre de la Carrera">
 					<p>Tipo de Carrera</p>
 					<select name="tipo" required>
 						<option value="" selected>Seleccione el Tipo</option>
@@ -44,7 +49,34 @@ require('layout/footer.php');
 						<option value="Tecnico Medio">TECNICO MEDIO</option>
 						<option value="Carrera Corta">CORTA</option>
 					</select>
-					<p><input type="submit" value="Add New" class="btn btn-primary"></p>
+
+					<p>Seleccione al Encargad@ de la Carrera</p>
+					<select name="jefeCarrera" required>
+						<option value="" selected>Seleccione una opcion*</option>
+						<?php
+						$value1 = $seleccionTablaJefecarrera->get();
+						foreach ($value1 as $key) {
+							$valor1 = $key['nombre'];
+							$valor2 = $key['idJefeCarrera'];
+							echo '<option value="' . $valor2 . '">' . $valor1 . '</option>';
+						}
+						?>
+					</select>
+					<p><input type="submit" value="Agregar" name="add" class="btn btn-primary"></p>
+					<?php
+					if (isset($_POST['add'])) {
+						$crud = new Crud("carreras");
+						$add1 = $_POST['inputCarrera'];
+						$add2 = $_POST['tipo'];
+						$add3 = $_POST['jefeCarrera'];
+						$crud->insert([
+							"carrera" => $add1,
+							"tipo" => $add2,
+							"idJefeCarrera" => $add3
+						]);
+						header("Location: carreras.php");
+					}
+					?>
 				</form>
 			</div>
 		</div>
@@ -61,10 +93,25 @@ require('layout/footer.php');
 			<div class="panel-body">
 				<form name="form" method="post">
 					<p>Seleccione la Carrera</p>
-					<select name="id" class="form-control" required>
-						<option value selected></option>
+					<select name="selectCarreras" class="form-control" required>
+						<option value selected>Seleccione una opcion</option>
+						<?php
+						$value1 = $seleccionTablaCarreras->get();
+						foreach ($value1 as $key) {
+							$valor1 = $key['carrera'];
+							$valor2 = $key['idCarrera'];
+							echo '<option value="' . $valor2 . '">' . $valor1 . '</option>';
+						}
+						?>
 					</select>
 					<input type="submit" name="del" value="Eliminar" class="btn btn-primary">
+					<?php
+					if (isset($_POST['del'])) {
+						$del = $_POST['selectCarreras'];
+						$seleccionTablaCarreras->where("idCarrera", "=", $del)->delete();
+						header("Location: carreras.php");
+					}
+					?>
 				</form>
 			</div>
 		</div>

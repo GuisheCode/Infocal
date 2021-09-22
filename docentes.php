@@ -17,7 +17,13 @@ require('layout/menu.php');
 
 //include header template
 require('layout/footer.php');
+
+//-----
+$seleccionTablaAulas = new Crud("aulas");
+$seleccionTablaDocentes = new Crud("docentes");
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -37,8 +43,18 @@ require('layout/footer.php');
 			<div class="panel panel-primary">
 				<div class="panel-body">
 					<form method="post">
-						<input type="text" name="carrera" placeholder="Ingrese el nombre del docente">
-						<p><input type="submit" value="Agregar" class="btn btn-primary"></p>
+						<input type="text" name="inputDocente" placeholder="Ingrese el nombre del docente">
+						<p><input type="submit" value="Agregar" name="add" class="btn btn-primary"></p>
+						<?php
+						if (isset($_POST['add'])) {
+							$crud = new Crud("docentes");
+							$add = $_POST['inputDocente'];
+							$crud->insert([
+								"nombre" => $add
+							]);
+							header("Location: docentes.php");
+						}
+						?>
 					</form>
 				</div>
 			</div>
@@ -52,8 +68,18 @@ require('layout/footer.php');
 			<div class="panel panel-primary">
 				<div class="panel-body">
 					<form method="post">
-						<input type="text" name="carrera" placeholder="Ingrese el Aula">
-						<p><input type="submit" value="Agregar" class="btn btn-primary"></p>
+						<input type="text" name="inputAula" placeholder="Ingrese el Aula">
+						<p><input type="submit" value="Agregar" name="add" class="btn btn-primary"></p>
+						<?php
+						if (isset($_POST['add'])) {
+							$crud = new Crud("aulas");
+							$add = $_POST['inputAula'];
+							$crud->insert([
+								"aula" => $add
+							]);
+							header("Location: docentes.php");
+						}
+						?>
 					</form>
 				</div>
 			</div>
@@ -70,18 +96,25 @@ require('layout/footer.php');
 			<div class="panel-body">
 				<form name="form" method="post">
 					<p>Seleccione al docente</p>
-					<select name="id" class="form-control" required>
-						<option value selected></option>
-						<?php 
-						$seleccionTablaMaterias = new Crud("docentes");
-						$whereAndWhere = $seleccionTablaMaterias->get();
-						foreach($whereAndWhere as $index){
-							$value1 = $echo['idDocentes'];
-							$value2 = $echo['nombre'];
+					<select name="selectDocentes" class="form-control" required>
+						<option value selected>Seleccione una opcion</option>
+						<?php
+						$value1 = $seleccionTablaDocentes->get();
+						foreach ($value1 as $key) {
+							$valor1 = $key['nombre'];
+							$valor2 = $key['idDocente'];
+							echo '<option value="' . $valor2 . '">' . $valor1 . '</option>';
 						}
 						?>
 					</select>
 					<input type="submit" name="del" value="Eliminar" class="btn btn-primary">
+					<?php
+					if (isset($_POST['del'])) {
+						$del = $_POST['selectDocentes'];
+						$seleccionTablaDocentes->where("idDocente", "=", $del)->delete();
+						header("Location: docentes.php");
+					}
+					?>
 				</form>
 			</div>
 		</div>
@@ -97,11 +130,26 @@ require('layout/footer.php');
 			<div class="panel-body">
 				<form name="form" method="post">
 					<p>Seleccione el aula</p>
-					<select name="id" class="form-control" required>
-						<option value selected></option>
-						
+					<select name="selectAula" class="form-control" required>
+						<option value selected>Seleccione una opcion</option>
+						<?php
+						$value1 = $seleccionTablaAulas->get();
+						foreach ($value1 as $key) {
+							$valor1 = $key['aula'];
+							$valor2 = $key['idAula'];
+							echo '<option value="' . $valor2 . '">' . $valor1 . '</option>';
+						}
+						?>
 					</select>
+
 					<input type="submit" name="del" value="Eliminar" class="btn btn-primary">
+					<?php
+					if (isset($_POST['del'])) {
+						$del = $_POST['selectAula'];
+						$seleccionTablaAulas->where("idAula", "=", $del)->delete();
+						header("Location: docentes.php");
+					}
+					?>
 				</form>
 			</div>
 		</div>
