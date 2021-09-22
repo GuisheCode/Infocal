@@ -1,6 +1,6 @@
 <!--===== MAIN JS =====-->
 <script src="assets/main.js"></script>
-<script>
+<!-- <script>
     $('#enviar').click(function(){
         let recurso = document.getElementById('recurso').value;
         let idMateria = document.getElementById('idMateria').value;
@@ -21,7 +21,7 @@
             console.log("complete")
         });
     });
-</script>
+</script> -->
 <script src="modal.js"></script>
 </body>
 </html>

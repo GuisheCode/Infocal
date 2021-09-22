@@ -66,6 +66,15 @@ $seleccionTablaAulas =new Crud("aulas");
 $seleccionTablaCarreras =new Crud("carreras");
 $seleccionTablaDocentes =new Crud("docentes");
 $seleccionTablaRecursos =new Crud("recursos");
+$nulo= NULL;
+$array=array();
+$selectRecursos=$seleccionTablaRecursos->where("idMateria","=",0)->get();
+foreach ($selectRecursos as $recursos){
+	$array[]= $recursos['recurso'];
+	
+}
+echo count($array);
+echo $array[0];
 $selectAll=$seleccionTablaMaterias->get();
 
 $fechaHoy=date('Ymd');
@@ -87,7 +96,8 @@ foreach ($selectAll as $key) {
 	$horaFinEntero=str_replace(":","",$horaFinString);
 	$diferenciaHoraFin = $hora-$horaFinEntero;
 	
-	if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
+	// if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
+	if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraFin<=0){
 		$idMaterias = $key['idMaterias'];
 		$idDocente = $key['idDocente'];
 		$idCarrera = $key['idCarrera'];
@@ -96,6 +106,7 @@ foreach ($selectAll as $key) {
 		$selectAllDocentes=$seleccionTablaDocentes->where("idDocente","=",$idDocente)->get();
 		$selectAllCarreras=$seleccionTablaCarreras->where("idCarrera","=",$idCarrera)->get();
 		$selectAllRecursos=$seleccionTablaRecursos->where("idMateria","=",$idMaterias)->get();
+		
 		foreach ($selectAllDocentes as $valoresDocentes) {	
 			foreach ($selectAllCarreras as $valoresCarreras) {
 				foreach ($selectAllAulas as $valoresAulas) {
@@ -111,13 +122,31 @@ foreach ($selectAll as $key) {
 					</div>
 					<h5 class="subTarjeta">Carrera: <b><i><?php echo $valoresCarreras['carrera'] ?></i></b></h5>
 					<h5 class="subTarjeta">Docente: <b><i><?php echo $valoresDocentes['nombre'] ?></i></b></h5>
-					
+					<h5 class="subTarjeta">Horario: <b><i><?php echo $key['horaInicio'] ?> - <?php echo $key['horaFin'] ?></i></b></h5>
 					<h5 class="subTarjeta">Recurso(s):</h5>
 					<?php foreach ($selectAllRecursos as $valoresRecursos) {?> 
 						<?php echo "<h5 class='subTarjeta'><b><i>- ".$valoresRecursos['recurso']."</i></b></h5>"?>
 					<?php
 					}
 					?>
+					<p hidden><?php echo $key['idMaterias'] ?></p>
+					<form action="" id="formRecursos">
+						<?php
+						
+						?>
+						<select hidden name="" id="">
+							<?php
+							for ($i=0; $i < count($array); $i++) {
+							?>
+							<option value="s"><?php  
+							echo $array[$i];
+							?></option>
+							<?php
+							}
+							?>
+						</select>
+					</form>
+					<button type="button" id="actRecurso">Cambiar/Quitar Recurso</button>
 				</div>
 			</div>
 <?php		
@@ -146,6 +175,9 @@ foreach ($selectAll as $key) {
 <button type="button" id="enviar">Enviar</button>
 </form>
 <br>
+<select name="" id="">
+							<option value=""><?php echo $recursos['recurso'] ?></option>
+						</select>
 <div id="respuesta"></div>
 
 

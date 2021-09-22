@@ -70,14 +70,20 @@ const addAttributes = (element, attrObj) => {
 
 
 const printModal= content => {
-    const modalContentEl = createCustomElement('div',{
+	const modalInputRecurso = createCustomElement('input',{
+		id:"recurso",
+		class:"recurso",
+		placeholder:"Recurso"
+	},[content])
+    const modalContentEl = createCustomElement('form',{
     id:"ed-modal-content",
     class:"ed-modal-content"
-}, [content])
+}, [modalInputRecurso])
     const modalContainerEl = createCustomElement('div', {
         id:"cont",
         class: "cont"
     }, [modalContentEl]);
+	
 
     // Imprimir modal
     document.body.appendChild(modalContainerEl);
