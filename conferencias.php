@@ -57,6 +57,11 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 
 
 ?>
+
+
+
+
+
 <div class="fila">
 	<br>
 	<h4 class="tituloDocente">Conferencias y eventos</h4>
