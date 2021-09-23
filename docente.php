@@ -68,13 +68,16 @@ $seleccionTablaDocentes =new Crud("docentes");
 $seleccionTablaRecursos =new Crud("recursos");
 $nulo= NULL;
 $array=array();
+$arrayKeys=array();
 $selectRecursos=$seleccionTablaRecursos->where("idMateria","=",0)->get();
 foreach ($selectRecursos as $recursos){
 	$array[]= $recursos['recurso'];
-	
+	$arrayKeys[]= $recursos['idRecurso'];
 }
-echo count($array);
-echo $array[0];
+// echo count($array);
+// echo $array[0];
+echo count($arrayKeys);
+echo $arrayKeys[1];
 $selectAll=$seleccionTablaMaterias->get();
 
 $fechaHoy=date('Ymd');
@@ -130,22 +133,22 @@ foreach ($selectAll as $key) {
 					}
 					?>
 					<p hidden><?php echo $key['idMaterias'] ?></p>
-					<form action="" id="formRecursos">
+					<div><form hidden action="" id="formRecursos">
 						<?php
 						
 						?>
-						<select hidden name="" id="">
+						
+						<select name="" id="">
 							<?php
 							for ($i=0; $i < count($array); $i++) {
 							?>
-							<option value="s"><?php  
-							echo $array[$i];
-							?></option>
+							<option value="<?php echo $arrayKeys[$i]; ?>">
+							<?php  echo $array[$i]; ?></option>
 							<?php
 							}
 							?>
 						</select>
-					</form>
+					</form></div>
 					<button type="button" id="actRecurso">Cambiar/Quitar Recurso</button>
 				</div>
 			</div>
@@ -158,6 +161,7 @@ foreach ($selectAll as $key) {
 }
 ?>
 <?php 
+print_r($arrayKeys);
 ?>
 </div>
 
@@ -176,10 +180,42 @@ foreach ($selectAll as $key) {
 </form>
 <br>
 <select name="" id="">
-							<option value=""><?php echo $recursos['recurso'] ?></option>
+							<option value="12"><?php echo $recursos['recurso'] ?></option>
 						</select>
 <div id="respuesta"></div>
 
+
+
+
+
+<!---------------------- Modal funcional -------------------->
+<button data-modal-target="#modal">Open Modal</button>
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="title">Example Modal</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+	<div><form action="" id="formRecursos">
+						<?php
+						
+						?>
+						
+						<select name="" id="">
+							<?php
+							for ($i=0; $i < count($array); $i++) {
+							?>
+							<option value="<?php echo $arrayKeys[$i]; ?>">
+							<?php  echo $array[$i]; ?></option>
+							<?php
+							}
+							?>
+							
+						</select><button type="button" id="nuevoRecurso">Enviar</button>
+					</form></div>    
+				</div>
+  </div>
+  <div id="overlay"></div>
 
 
 <div class="">		
