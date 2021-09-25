@@ -70,28 +70,11 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 $seleccionTablaAulas =new Crud("conferencias");
 $selectAll=$seleccionTablaAulas->get();
 
-//$fechaHoy=date('Ymd');
-//$hora =date('Gis');
 foreach ($selectAll as $key) {
-	//$valorStringInicio = $key['fechaInicio'];
-	//$valorEnteroInicio=str_replace("-","",$valorStringInicio);
-	//$diferenciaInicio = $fechaHoy-$valorEnteroInicio;
 
-	//$valorStringFin = $key['fechaFin'];
-	//$valorEnteroFin = str_replace("-","",$valorStringFin);
-	//$diferenciaFin = $fechaHoy-$valorEnteroFin;
-	
-	//if ($diferenciaInicio>=0 && $diferenciaFin<=0 && $diferenciaHoraInicio>=0 && $diferenciaHoraFin<=0){
-		//$idMaterias = $key['idMaterias'];
-		//$idDocente = $key['idDocente'];
-		//$idCarrera = $key['idCarrera'];
 		$idAula = $key['idconferencia'];
 		$selectAllAulas=$seleccionTablaAulas->where("idconferencia","=",$idAula)->get();
-		//$selectAllDocentes=$seleccionTablaDocentes->where("idDocente","=",$idDocente)->get();
-		//$selectAllCarreras=$seleccionTablaCarreras->where("idCarrera","=",$idCarrera)->get();
-		//$selectAllRecursos=$seleccionTablaRecursos->where("idMateria","=",$idMaterias)->get();
-		//foreach ($selectAllDocentes as $valoresDocentes) {	
-			//foreach ($selectAllCarreras as $valoresCarreras) {
+
 				foreach ($selectAllAulas as $valoresAulas) {
 					
 		?>
@@ -107,15 +90,14 @@ foreach ($selectAll as $key) {
 					<h5 class="subTarjeta">Fecha Final: <b><i><?php echo $valoresAulas['fechafin'] ?></i></b></h5>
 					<h5 class="subTarjeta">Descripción: <b><i><?php echo $valoresAulas['descripcion'] ?></i></b></h5>
 					<h5 class="subTarjeta">Asistencia: <b><i><?php echo $valoresAulas['asistencia'] ?></i></b></h5>
+					<h3 class="subTarjeta">Horario: <b><i><?php echo $valoresAulas['horaini'] ?> - <b><i><?php echo $valoresAulas['horafin'] ?></i></b></h3>
 										
 				</div>
 			</div>
 <?php		
 					
 				}
-			//}
-		//}
-	//}
+
 }
 ?>
 <?php 

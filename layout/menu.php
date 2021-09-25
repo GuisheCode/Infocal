@@ -8,7 +8,7 @@
             <nav class="navi">
                 <div class="logo">Infocal</div>
                 <div class="nav-items">
-                    <li><a href="#">Conferencias</a></li>
+                    <li><a href="conferencias.php">Conferencias</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Blogs</a></li>
                     <li><a href="#">Contact</a></li>
@@ -61,7 +61,7 @@
                             <span class="nav__name">Users</span>
                         </a>
                         
-                        <a href="conferencias.php" class="nav__link active">
+                        <a href="adm-conferencias.php" class="nav__link active">
                             <i class='bx bx-message-square-detail nav__icon' ></i>
                             <span class="nav__name">Conferencias</span>
                         </a>
