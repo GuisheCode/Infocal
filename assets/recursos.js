@@ -1,4 +1,5 @@
-$('#actRecurso').click(function(){
+$('#actRecurso').click(function(e){
+    e.pre
     let recurso = document.getElementById('recurso').value;
     let idMateria = document.getElementById('idMateria').value;
     let ruta ="rec="+recurso+"&id="+idMateria;

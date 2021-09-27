@@ -10,74 +10,33 @@ if (! $user->is_logged_in()){
 }
 
 // Definimos el titulo de la pagina
-$title = 'Docente';
+$title = 'Administración';
 
 // Incluimos el header y el menu de navegación
 require('layout/header.php'); 
 require('layout/menu.php');
 
-/***************** PARA CONSULTAR ALGUNOS DATOS DE UNA TABLA ******************/
-//  SELECT * FROM tablaMaterias WHERE AND WHERE
-//  Creamos objeto para utilizar con la tabla "materias"
-$seleccionTablaMaterias = new Crud("materias");
-//  Pasamos los datos a la funcion, que nos devuelve un array con los datos que pedimos
-$whereAndWhere = $seleccionTablaMaterias->where("idDocente","=",2)->where("idCarrera","=",1)->get();
-//  Muestra el array con su tipo de datos
-// echo "<pre>";
-// var_dump($whereAndWhere);
-// echo "</pre>";
-//  Recorremos todos los datos devueltos por la consulta y los guardamos en variables separadas
-foreach($whereAndWhere as $index){
-    $idMaterias = $index['idMaterias'];
-    $materia    = $index['materia'];
-    $idDocente  = $index['idDocente'];
-    $idCarrera  = $index['idCarrera'];
-}
-
-/***************** PARA CONSULTAR TODOS LOS DATOS DE UNA TABLA ******************/
-//  Consulta todos los datos de una tabla
-// $selectAll=$seleccionTablaMaterias->get();
-//  Muestra el array con toda la consulta devuelta
-// echo "<pre>";
-// var_dump($selectAll);
-// echo "</pre>";
-
-/***************** PARA ACTUALIZAR UNA TABLA ******************/
-$update = $seleccionTablaMaterias->where("idMaterias","=",1)->update(["materia"=>"BD","idDocente"=>1,"idCarrera"=>1]);
-
-/***************** PARA ELIMINAR DATOS DE UNA TABLA ******************/
-$delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
-
-/***************** Muestra los registros afectados ******************/
-// echo "FILAS ACTUALIZADAS: " . $update . " ELIMINADOS: " . $delete;
-
 
 ?>
-<div class="fila" id="fila">
+<div class="fila">
     <br>
-    <h4 class="tituloDocente">Mis clases hoy</h4>
+    <h4 class="tituloDocente">Todas las clases de hoy</h4>
     <hr>
     <?php
-
-//	Seleccionamos todas las tablas que se usaran en esta ventana
 $seleccionTablaAulas =new Crud("aulas");
 $seleccionTablaCarreras =new Crud("carreras");
 $seleccionTablaDocentes =new Crud("docentes");
 $seleccionTablaRecursos =new Crud("recursos");
-
-//	Seleccionamos todos los recursos que no estan en uso
-//	Arrays para los datos de los recursos seleccionados
-$arrayNombreRecurso=array();
+$nulo= NULL;
+$array=array();
+$arrayKeys=array();
 $arrayIdRecurso=array();
-$arrayRecursoIdMateria=array();
 $selectRecursos=$seleccionTablaRecursos->where("idMateria","=",0)->get();
 foreach ($selectRecursos as $recursos){
-	$arrayNombreRecurso[]= $recursos['recurso'];
-	$arrayIdRecurso[]= $recursos['idRecurso'];
-	$arrayRecursoIdMateria[]=$recursos['idMateria'];
+	$array[]= $recursos['recurso'];
+	$arrayKeys[]= $recursos['idRecurso'];
+	$arrayIdRecurso[]=$recursos['idMateria'];
 }
-
-
 $selectAll=$seleccionTablaMaterias->get();
 $fechaHoy=date('Ymd');
 $hora =date('Gis');
@@ -127,7 +86,7 @@ foreach ($selectAll as $key) {
             <h5 class="subTarjeta">Recurso(s):</h5>
 			<div class="recursos">
             <?php foreach ($selectAllRecursos as $valoresRecursos) {?>
-            <?php echo "<div class='outer'><div class='divBtnRec'><p class='subTarjeta1'><b><i>- ".$valoresRecursos['recurso']."</i></b></p></div><div class='divBtnRec'><button type='button' id='abrirModal' onclick='capturar(".$valoresRecursos['idRecurso'].")'>Quitar</button></div></div>"?>
+            <?php echo "<p class='subTarjeta1'><b><i>- ".$valoresRecursos['recurso']."</i></b></p> <button type='button' onclick='capturar(".$valoresRecursos['idRecurso'].")'>Quitar</button>"?>
             <?php
 					}
 					?></div>
@@ -143,20 +102,6 @@ foreach ($selectAll as $key) {
 }
 ?>
 </div>
-
-
-<!-- Formularios agregar y quitar recurso -->
-<div class="modal-container" id="modal-container">
-	<div class="modal-content">
-<form>
-	<h5 class="tituloModal">¿Esta seguro de eliminar este recurso?</h5>
-	<h5 id="respuesta"></h5>
-	<div class="botones">
-	<button type="submit" id="quitarRecurso">Si</button>
-	<button type="submit" id="cerrarModal">No</button></div>
-</form></div></div>
-
-
 <div class="">
     <h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
     <?php

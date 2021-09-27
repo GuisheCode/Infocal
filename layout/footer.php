@@ -4,9 +4,8 @@
     $('#enviar').click(function(){
         let recurso = document.getElementById('recurso').value;
         let idMateria = document.getElementById('idMateria').value;
-        
-        let recursosDisponibles = [<?php $array; ?>]
-        let ruta ="rec="+recursosDisponibles+"&id="+idMateria;
+        let ruta ="rec="+recurso+"&id="+idMateria;
+        $.ajax({
             url:'back.php',
             type:'POST',
             data: ruta,
@@ -23,43 +22,53 @@
     });
 </script>
 <script src="modal.js"></script>
+
 <script>
-    const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
-
-openModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = document.querySelector(button.dataset.modalTarget)
-    openModal(modal)
-  })
+    let abrir=document.getElementById('abrirModal');
+    let modal_container=document.getElementById('modal-container');
+    let cerrar= document.getElementById(cerrarModal);
+    
+   function capturar(e)
+ {
+    value = e; 
+    //document.getElementById("valor").value=value;
+    console.log(value)
+    modal_container.classList.add('show');
+ }
+ $('#quitarRecurso').on('click', function(e){
+     e.preventDefault();
+        let valor =value;
+        let ruta ="idRec="+valor;
+        $.ajax({
+            url:'quitarRecurso.php',
+            type:'POST',
+            data: ruta,
+        })
+        .done(function (res) {
+            $('#respuesta').html(res)
+            modal_container.classList.remove('show');
+        })
+        .fail(function () {
+            console.log("error");
+        })
+        .always(function () {
+            console.log("complete")
+        });
+        $("#fila").load(" #fila");
+    });
+//     cerrar.addEventListener('click',()=>{
+//     modal_container.classList.remove('show');
+// });
+$('#cerrarModal').on('click', function(e){
+        e.preventDefault();
+        modal_container.classList.remove('show');
+    })
+$('#modalContainer').on('click',function(){
+    modal_container.classList.remove('show');
 })
-
-overlay.addEventListener('click', () => {
-  const modals = document.querySelectorAll('.modal.active')
-  modals.forEach(modal => {
-    closeModal(modal)
-  })
-})
-
-closeModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = button.closest('.modal')
-    closeModal(modal)
-  })
-})
-
-function openModal(modal) {
-  if (modal == null) return
-  modal.classList.add('active')
-  overlay.classList.add('active')
-}
-
-function closeModal(modal) {
-  if (modal == null) return
-  modal.classList.remove('active')
-  overlay.classList.remove('active')
-}
+modal_container.addEventListener('click', e=> {
+        if (e.target === modal_container) modal_container.classList.remove('show');; 
+    });
 </script>
 </body>
 </html>
