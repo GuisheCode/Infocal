@@ -65,17 +65,7 @@ $seleccionTablaCarreras =new Crud("carreras");
 $seleccionTablaDocentes =new Crud("docentes");
 $seleccionTablaRecursos =new Crud("recursos");
 
-//	Seleccionamos todos los recursos que no estan en uso
-//	Arrays para los datos de los recursos seleccionados
-$arrayNombreRecurso=array();
-$arrayIdRecurso=array();
-$arrayRecursoIdMateria=array();
-$selectRecursos=$seleccionTablaRecursos->where("idMateria","=",0)->get();
-foreach ($selectRecursos as $recursos){
-	$arrayNombreRecurso[]= $recursos['recurso'];
-	$arrayIdRecurso[]= $recursos['idRecurso'];
-	$arrayRecursoIdMateria[]=$recursos['idMateria'];
-}
+
 
 
 $selectAll=$seleccionTablaMaterias->get();
@@ -125,13 +115,13 @@ foreach ($selectAll as $key) {
             <h5 class="subTarjeta">Horario: <b><i><?php echo $key['horaInicio'] ?> -
                         <?php echo $key['horaFin'] ?></i></b></h5>
             <h5 class="subTarjeta">Recurso(s):</h5>
-			<div class="recursos">
-            <?php foreach ($selectAllRecursos as $valoresRecursos) {?>
-            <?php echo "<div class='outer'><div class='divBtnRec'><p class='subTarjeta1'><b><i>- ".$valoresRecursos['recurso']."</i></b></p></div><div class='divBtnRec'><button type='button' id='abrirModal' onclick='capturar(".$valoresRecursos['idRecurso'].")'>Quitar</button></div></div>"?>
-            <?php
+            <div class="recursos">
+                <?php foreach ($selectAllRecursos as $valoresRecursos) {?>
+                <?php echo "<div class='outer'><div class='divBtnRec'><p class='subTarjeta1'><b><i>- ".$valoresRecursos['recurso']."</i></b></p></div><div class='divBtnRec'><button type='button' id='abrirModal' onclick='capturarIdRecurso(".$valoresRecursos['idRecurso'].")'>Quitar</button></div></div>"?>
+                <?php
 					}
 					?></div>
-            <button type="button" onclick="capturar(<?php echo $key['idMaterias']; ?>)">Agregar/quitar Recurso</button>
+            <button type="button" id="abrirAgregar" onclick="capturarIdMateria(<?php echo $key['idMaterias']; ?>)">Agregar recurso</button>
         </div>
     </div>
     <?php		
@@ -142,21 +132,68 @@ foreach ($selectAll as $key) {
 	}
 }
 ?>
+
+</div>
+<div id="modales">
+<?php
+
+?>
+<!-- Formularios agregar y quitar recurso -->
+<!-- Quitar recurso -->
+<div class="modal-container" id="modal-container">
+    <div class="modal-content">
+        <form>
+            <h5 class="tituloModal">¿Esta seguro de eliminar este recurso?</h5>
+            <div class="botones">
+                <button type="submit" id="quitarRecurso">Si</button>
+                <button type="submit" id="cerrarModal">No</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Quitar recurso - tarea realizada -->
+<div class="modal-container-success" id="modal-container-success">
+    <div class="modal-success" id="modal-success">
+        <h5 id="respuesta"></h5>
+    </div>
 </div>
 
+<!-- Agregar recurso -->
+<div class="" id="contenedor-agregar-recurso">
+    <div class="contenido-agregar-recurso">
+        <form>
+            <h5 class="tituloModal">Elija un recurso</h5>
+            <h5 class="subtituloModal">Recursos disponibles:</h5>
+            <div id="selec">
+            <select name="" id="">
+                <?php
 
-<!-- Formularios agregar y quitar recurso -->
-<div class="modal-container" id="modal-container">
-	<div class="modal-content">
-<form>
-	<h5 class="tituloModal">¿Esta seguro de eliminar este recurso?</h5>
-	<h5 id="respuesta"></h5>
-	<div class="botones">
-	<button type="submit" id="quitarRecurso">Si</button>
-	<button type="submit" id="cerrarModal">No</button></div>
-</form></div></div>
-
-
+                            //	Seleccionamos todos los recursos que no estan en uso
+//	Arrays para los datos de los recursos seleccionados
+$arrayNombreRecurso=array();
+$arrayIdRecurso=array();
+$arrayRecursoIdMateria=array();
+$selectRecursos=$seleccionTablaRecursos->where("idMateria","=",0)->get();
+foreach ($selectRecursos as $recursos){
+	$arrayNombreRecurso[]= $recursos['recurso'];
+	$arrayIdRecurso[]= $recursos['idRecurso'];
+	$arrayRecursoIdMateria[]=$recursos['idMateria'];
+}
+							for ($i=0; $i < count($arrayIdRecurso); $i++) {
+							?>
+                <option value="<?php echo $arrayIdRecurso[$i]; ?>">
+                    <?php  echo $arrayNombreRecurso[$i]; ?></option>
+                <?php
+							}
+							?>
+            </select></div>
+                <div class="botones">
+                    <button type="submit" id="agregarRecurso">Agregar</button>
+                </div>
+        </form>
+    </div>
+</div>
+</div>
 <div class="">
     <h2>Mis Actividades - <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES); ?></h2>
     <?php

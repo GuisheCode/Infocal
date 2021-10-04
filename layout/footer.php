@@ -27,26 +27,33 @@
     let abrir=document.getElementById('abrirModal');
     let modal_container=document.getElementById('modal-container');
     let cerrar= document.getElementById(cerrarModal);
+    let modal_success= document.getElementById('modal-container-success');
     
-   function capturar(e)
+   function capturarIdRecurso(e)
  {
-    value = e; 
+    idRecurso = e; 
     //document.getElementById("valor").value=value;
-    console.log(value)
+    console.log(idRecurso)
     modal_container.classList.add('show');
  }
  $('#quitarRecurso').on('click', function(e){
      e.preventDefault();
-        let valor =value;
-        let ruta ="idRec="+valor;
+        let ruta ="idRec="+idRecurso;
         $.ajax({
             url:'quitarRecurso.php',
             type:'POST',
             data: ruta,
         })
         .done(function (res) {
-            $('#respuesta').html(res)
-            modal_container.classList.remove('show');
+            $('#respuesta').html(res);
+            $("#fila").load(" #fila");
+             $("#selec").load(" #selec");
+            modal_container.classList.remove('show')
+            modal_success.classList.add('show');
+            setTimeout(function(){ 
+                modal_success.classList.remove('show');
+                // $("#modales").load(" #modales");
+            }, 1800);
         })
         .fail(function () {
             console.log("error");
@@ -54,7 +61,7 @@
         .always(function () {
             console.log("complete")
         });
-        $("#fila").load(" #fila");
+        
     });
 //     cerrar.addEventListener('click',()=>{
 //     modal_container.classList.remove('show');
@@ -68,6 +75,22 @@ $('#modalContainer').on('click',function(){
 })
 modal_container.addEventListener('click', e=> {
         if (e.target === modal_container) modal_container.classList.remove('show');; 
+    });
+</script>
+<script>
+    let abrirAgregar=document.getElementById('abrirAgregar');
+    let modal_container_agregar=document.getElementById('contenedor-agregar-recurso');
+    
+   function capturarIdMateria(e)
+ {
+    idMateria = e; 
+    console.log(idMateria)
+    modal_container_agregar.classList.add('show');
+ }
+
+
+ modal_container_agregar.addEventListener('click', e=> {
+        if (e.target === modal_container_agregar) modal_container_agregar.classList.remove('show');; 
     });
 </script>
 </body>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 ?>
@@ -16,7 +16,7 @@
                 <div class="nav__img">
                     <img src="assets/img/perfil.png" alt="">
                 </div>
-                
+
                 <div>
                     <a href="#" class="nav__name">Jhon Doe</a>
                     <span class="nav__profesion">Web designer</span>
@@ -34,11 +34,16 @@
             </div>
 
             <div class="nav__social">
-                <a href="#" class="nav__social-icon"><ion-icon name="logo-linkedin"></ion-icon></a>
-                <a href="#" class="nav__social-icon"><ion-icon name="logo-github"></ion-icon></a>
-                <a href="#" class="nav__social-icon"><ion-icon name="logo-behance"></ion-icon></a>
+                <a href="#" class="nav__social-icon">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+                <a href="#" class="nav__social-icon">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a>
+                <a href="#" class="nav__social-icon">
+                    <ion-icon name="logo-behance"></ion-icon>
+                </a>
             </div>
         </div>
     </nav>
 </header>
-

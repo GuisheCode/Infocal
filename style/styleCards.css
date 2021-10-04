@@ -224,6 +224,7 @@ hr {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	box-shadow: 0px 3px 15px rgba(0.4, 0, 0, 0.8);
 }
 .tituloModal{
 padding-top: 15px;
@@ -266,4 +267,69 @@ font-family: "Roboto", sans-serif;
 }
 .botones{
 	padding-top: 50px;
+}
+
+
+#respuesta {
+	padding-top: 15px;
+	font-family: "Roboto", sans-serif;
+		font-weight: 300;
+		font-size: 22px;
+		color: rgb(0, 0, 0);
+}
+
+.modal-container-success{
+	/* background-color: rgba(0, 0, 0, 0.3); */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	opacity: 0;
+	pointer-events: none;
+}
+.modal-success{
+	background-color: white;
+	width: 320px;
+	height: 180px;
+	border-radius: 15px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	box-shadow: 0px 3px 15px rgba(0.4, 0, 0, 0.8);
+}
+.modal-container-success.show{
+	opacity: 1;
+	pointer-events: all;
+}
+/* Ventana modal para agregar recurso */
+#contenedor-agregar-recurso{
+	background-color: rgba(0, 0, 0, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	opacity: 0;
+	pointer-events: none;
+}
+#contenedor-agregar-recurso.show{
+	opacity: 1;
+	pointer-events: all;
+}
+.contenido-agregar-recurso{
+	background-color: white;
+	width: 400px;
+	height: 250px;
+	border-radius: 15px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	box-shadow: 0px 3px 15px rgba(0.4, 0, 0, 0.8);
 }
