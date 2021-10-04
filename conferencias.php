@@ -20,17 +20,10 @@ require('layout/menu.php');
 
 
 
-/***************** PARA CONSULTAR ALGUNOS DATOS DE UNA TABLA ******************/
-//  SELECT * FROM tablaMaterias WHERE AND WHERE
-//  Creamos objeto para utilizar con la tabla "materias"
+
 $seleccionTablaMaterias = new Crud("conferencias");
-//  Pasamos los datos a la funcion, que nos devuelve un array con los datos que pedimos
 $whereAndWhere = $seleccionTablaMaterias->where("idDocente","=",2)->where("idCarrera","=",1)->get();
-//  Muestra el array con su tipo de datos
-// echo "<pre>";
-// var_dump($whereAndWhere);
-// echo "</pre>";
-//  Recorremos todos los datos devueltos por la consulta y los guardamos en variables separadas
+
 foreach($whereAndWhere as $index){
     $idMaterias = $index['idMaterias'];
     $materia    = $index['materia'];
@@ -38,15 +31,6 @@ foreach($whereAndWhere as $index){
     $idCarrera  = $index['idCarrera'];
 }
 
-/***************** PARA CONSULTAR TODOS LOS DATOS DE UNA TABLA ******************/
-//  Consulta todos los datos de una tabla
-// $selectAll=$seleccionTablaMaterias->get();
-//  Muestra el array con toda la consulta devuelta
-// echo "<pre>";
-// var_dump($selectAll);
-// echo "</pre>";
-
-/***************** PARA ACTUALIZAR UNA TABLA ******************/
 $update = $seleccionTablaMaterias->where("idMaterias","=",1)->update(["materia"=>"BD","idDocente"=>1,"idCarrera"=>1]);
 
 /***************** PARA ELIMINAR DATOS DE UNA TABLA ******************/
@@ -89,7 +73,6 @@ foreach ($selectAll as $key) {
 					<h5 class="subTarjeta">Fecha Inicio: <b><i><?php echo $valoresAulas['fechaini'] ?></i></b></h5>
 					<h5 class="subTarjeta">Fecha Final: <b><i><?php echo $valoresAulas['fechafin'] ?></i></b></h5>
 					<h5 class="subTarjeta">Descripción: <b><i><?php echo $valoresAulas['descripcion'] ?></i></b></h5>
-					<h5 class="subTarjeta">Asistencia: <b><i><?php echo $valoresAulas['asistencia'] ?></i></b></h5>
 					<h3 class="subTarjeta">Horario: <b><i><?php echo $valoresAulas['horaini'] ?> - <b><i><?php echo $valoresAulas['horafin'] ?></i></b></h3>
 										
 				</div>

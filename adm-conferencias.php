@@ -138,6 +138,50 @@ $seleccionTablaMaterias = new Crud("conferencias");
 			</div>
 		</div>
 	</div>
+	<div>
+	<div class="fila">
+	<br>
+	<h4 class="tituloDocente">Editar conferencias y eventos</h4>
+	<hr>
+<?php
+$seleccionTablaAulas =new Crud("conferencias");
+$selectAll=$seleccionTablaAulas->get();
+
+foreach ($selectAll as $key) {
+
+		$idAula = $key['idconferencia'];
+		$selectAllAulas=$seleccionTablaAulas->where("idconferencia","=",$idAula)->get();
+
+				foreach ($selectAllAulas as $valoresAulas) {
+					
+		?>
+			<div class="columna">
+				<div class="card">
+				<div class="dentro">
+					<br>
+					<i class="fas fa-chalkboard-teacher iconoTarjeta"></i>
+					<h4 class="tituloTarjeta"><b><?php echo $valoresAulas['nombre'] ?></b></h4>
+					<h5 class="subtituloTarjeta">Docente: <i><?php echo $valoresAulas['docente'] ?></i></h5>
+					</div>
+					<h5 class="subTarjeta">Fecha Inicio: <b><i><?php echo $valoresAulas['fechaini'] ?></i></b></h5>
+					<h5 class="subTarjeta">Fecha Final: <b><i><?php echo $valoresAulas['fechafin'] ?></i></b></h5>
+					<h5 class="subTarjeta">Descripción: <b><i><?php echo $valoresAulas['descripcion'] ?></i></b></h5>
+					<h3 class="subTarjeta">Horario: <b><i><?php echo $valoresAulas['horaini'] ?> - <b><i><?php echo $valoresAulas['horafin'] ?></i></b></h3>
+					<div class="px-1">
+						<a href="#" class="btn-warning">Editar <i class="fas fa-pencil-alt"></i></a>
+					</div>	
+				</div>
+			</div>
+<?php		
+					
+				}
+
+}
+?>
+
+
+</div>
+	</div>
 	</p>
 </body>
 
