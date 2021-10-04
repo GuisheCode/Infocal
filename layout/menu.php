@@ -68,7 +68,7 @@
 
                         <a href="#" class="nav__link">
                             <i class='bx bx-bookmark nav__icon' ></i>
-                            <span class="nav__name">Favorites</span>
+                            <span class="nav__name">Ver</span>
                         </a>
 
                         <a href="#" class="nav__link">

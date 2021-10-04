@@ -22,14 +22,13 @@ require('layout/footer.php');
 $seleccionTablaMaterias = new Crud("materias");
 $seleccionTablaAulas = new Crud("aulas");
 $seleccionTablaDocentes = new Crud("docentes");
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
@@ -40,6 +39,7 @@ $seleccionTablaDocentes = new Crud("docentes");
 	<!-- /. AGREGAR CARRERA  -->
 	<p>
 	<div id="page-wrapper">
+
 		<h1 class="page-header">
 			AGREGAR MATERIA <small></small>
 		</h1>
@@ -66,7 +66,7 @@ $seleccionTablaDocentes = new Crud("docentes");
 						foreach ($value1 as $key) {
 							$valor1 = $key['nombre'];
 							$valor2 = $key['idDocente'];
-							echo '<option value="' . $valor2 . '">'. $valor1 .'</option>';
+							echo '<option value="' . $valor2 . '">' . $valor1 . '</option>';
 						}
 						?>
 					</select>
@@ -158,11 +158,10 @@ $seleccionTablaDocentes = new Crud("docentes");
 						?>
 					</select>
 					<input type="submit" name="del" value="Eliminar" class="btn btn-primary">
-					<?php 
-					if(isset($_POST['del']))
-					{
+					<?php
+					if (isset($_POST['del'])) {
 						$del = $_POST['selectMaterias'];
-						$seleccionTablaMaterias->where("idMaterias","=",$del)->delete();
+						$seleccionTablaMaterias->where("idMaterias", "=", $del)->delete();
 						header("Location: materias.php");
 					}
 					?>

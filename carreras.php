@@ -52,7 +52,7 @@ $seleccionTablaJefecarrera = new Crud("jefecarrera");
 
 					<p>Seleccione al Encargad@ de la Carrera</p>
 					<select name="jefeCarrera" required>
-						<option value="" selected>Seleccione una opcion*</option>
+						<option selected>Seleccione una opcion*</option>
 						<?php
 						$value1 = $seleccionTablaJefecarrera->get();
 						foreach ($value1 as $key) {
@@ -64,15 +64,15 @@ $seleccionTablaJefecarrera = new Crud("jefecarrera");
 					</select>
 					<p><input type="submit" value="Agregar" name="add" class="btn btn-primary"></p>
 					<?php
+					$crud = new Crud("carreras");
 					if (isset($_POST['add'])) {
-						$crud = new Crud("carreras");
 						$add1 = $_POST['inputCarrera'];
 						$add2 = $_POST['tipo'];
 						$add3 = $_POST['jefeCarrera'];
 						$crud->insert([
 							"carrera" => $add1,
-							"tipo" => $add2,
-							"idJefeCarrera" => $add3
+							"idJefeCarrera" => $add3,
+							"tipo" => $add2
 						]);
 						header("Location: carreras.php");
 					}
