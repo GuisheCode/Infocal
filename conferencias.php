@@ -106,7 +106,6 @@ foreach ($selectAll as $key) {
 					<h5 class="subTarjeta">Fecha Inicio: <b><i><?php echo $valoresAulas['fechaini'] ?></i></b></h5>
 					<h5 class="subTarjeta">Fecha Final: <b><i><?php echo $valoresAulas['fechafin'] ?></i></b></h5>
 					<h5 class="subTarjeta">Descripción: <b><i><?php echo $valoresAulas['descripcion'] ?></i></b></h5>
-					<h5 class="subTarjeta">Asistencia: <b><i><?php echo $valoresAulas['asistencia'] ?></i></b></h5>
 										
 				</div>
 			</div>

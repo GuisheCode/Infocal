@@ -2,30 +2,30 @@
 ob_start();
 session_start();
 
-//set timezone
+// Definimos la zona horaria
 // date_default_timezone_set('Europe/London');
 setlocale(LC_ALL, 'es_ES');
 date_default_timezone_set('America/La_Paz');
-//database credentials
+//Credenciale de base de datos
 define('DBHOST','localhost');
 define('DBUSER','root');
 define('DBPASS','');
 define('DBNAME','infocal2');
 
-//application address
+// Direccion de la app - PHP MAILER
 define('DIR','http://domain.com/');
 define('SITEEMAIL','noreply@domain.com');
 
 try {
 
-	//create PDO connection
+	//Creamos la conexion PDO
 	$db = new PDO("mysql:host=".DBHOST.";charset=utf8mb4;dbname=".DBNAME, DBUSER, DBPASS);
     //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);//Suggested to uncomment on production websites
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);//Suggested to comment on production websites
     $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 } catch(PDOException $e) {
-	//show error
+	//Muestra errores
     echo '<p class="bg-danger">'.$e->getMessage().'</p>';
     exit;
 }
@@ -75,7 +75,7 @@ class Conexion {
 
 
 
-//include the user class, pass in the database connection
+// Incluimos la clase User
 include('classes/user.php');
 include('classes/phpmailer/mail.php');
 $user = new User($db);

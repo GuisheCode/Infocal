@@ -27,9 +27,7 @@
                 <ul class="nav__list">
                     <li class="nav__item"><a href="#" class="nav__link active">Inicio</a></li>
                     <li class="nav__item"><a href="#" class="nav__link">Mis Actividades</a></li>
-                    <li class="nav__item"><a href="#" class="nav__link">Skills</a></li>
-                    <li class="nav__item"><a href="#" class="nav__link">Portfolio</a></li>
-                    <li class="nav__item"><a href="#" class="nav__link">Contacto</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">Conferencias</a></li>
                 </ul>
             </div>
 
