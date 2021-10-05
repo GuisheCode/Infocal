@@ -102,5 +102,4 @@ class Crud {
         $this->wheres = "";
         $this->sql = null;
     }
-
 }
