@@ -9,8 +9,13 @@ if (! $user->is_logged_in()){
     exit(); 
 }
 
+<<<<<<< HEAD:docente.php
 // Definimos el titulo de la pagina
 $title = 'Docente';
+=======
+//define page title
+$title = 'Materias';
+>>>>>>> admin:respaldo-index.php
 
 // Incluimos el header y el menu de navegación
 require('layout/header.php'); 
@@ -205,4 +210,16 @@ foreach ($selectRecursos as $recursos){
 <?php 
 //include header template
 require('layout/footer.php'); 
+
+//insertar
+$crud = new Crud("usuario");
+$id = $crud->insert([
+    "nombres" => "John",
+    "apellidos" => "Smith",
+    "edad" => 18,
+    "correo" => "jhon@gmail.com",
+    "telefono" => "123",
+    "fecha_registro" => date("Y-m-d H:i:s")
+        ]);
+
 ?>
