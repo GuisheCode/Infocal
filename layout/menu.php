@@ -27,6 +27,37 @@
     </nav>
 
 
+<<<<<<< HEAD
+=======
+            <nav class="navi">
+                <div class="logo">Infocal</div>
+                <div class="nav-items">
+                    <li><a href="#">Conferencias</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blogs</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </div>
+                <div class="search-icon">
+                    <span class="fas fa-search"></span>
+                </div>
+                <div class="menu-icon">
+                    <span class="fas fa-bars"></span>
+                </div>
+                <div class="cancel-icon">
+                    <span class="fas fa-times"></span>
+                </div>
+                <form action="#">
+                    <input
+                        type="search"
+                        class="search-data"
+                        placeholder="Search"
+                        required
+                    />
+                    <button type="submit" class="fas fa-search"></button>
+                </form>
+            </nav>
+>>>>>>> conferencia
 
 
     <!-- <div class="header__img">
@@ -42,6 +73,7 @@
                 <span class="nav__logo-name">Bedimcode</span>
             </a>
 
+<<<<<<< HEAD
             <div class="nav__list">
                 <a href="#" class="nav__link active">
                     <i class='bx bx-grid-alt nav__icon'></i>
@@ -52,6 +84,23 @@
                     <i class='bx bx-user nav__icon'></i>
                     <span class="nav__name">Users</span>
                 </a>
+=======
+                    <div class="nav__list">
+                        <a href="docente.php" class="nav__link">
+                        <i class='bx bx-grid-alt nav__icon' ></i>
+                            <span class="nav__name">Docente</span>
+                        </a>
+
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__name">Users</span>
+                        </a>
+                        
+                        <a href="conferencias.php" class="nav__link active">
+                            <i class='bx bx-message-square-detail nav__icon' ></i>
+                            <span class="nav__name">Conferencias</span>
+                        </a>
+>>>>>>> conferencia
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-message-square-detail nav__icon'></i>
