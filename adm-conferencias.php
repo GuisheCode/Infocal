@@ -35,7 +35,6 @@ $seleccionTablaMaterias = new Crud("conferencias");
 </head>
 
 <body>
-	<!-- /. AGREGAR CARRERA  -->
 	<p>
 	<div id="page-wrapper">
 		<h1 class="page-header">
@@ -104,7 +103,6 @@ $seleccionTablaMaterias = new Crud("conferencias");
 		</div>
 	</div>
 	</p>
-	<!-- /. ELIMINAR MATERIA -->
 	<p>
 	<div id="page-wrapper">
 		<div id="page-inner">
