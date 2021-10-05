@@ -36,7 +36,7 @@ class Conexion {
     private $configuracion = [
         "driver" => "mysql",
         "host" => "localhost",
-        "database" => "infocal2",
+        "database" => "infocal",
         "port" => "3306",
         "username" => "root",
         "password" => "",
