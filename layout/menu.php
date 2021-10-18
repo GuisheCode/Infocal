@@ -5,11 +5,11 @@
     <nav class="navi">
         <div class="logo">Infocal</div>
         <div class="nav-items">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="#">Inicio</a></li>
+            <!-- <li><a href="#">About</a></li>
             <li><a href="#">Blogs</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Feedback</a></li> -->
         </div>
         <div class="search-icon">
             <span class="fas fa-search"></span>
@@ -39,7 +39,7 @@
         <div>
             <a href="#" class="nav__logo">
                 <i class='bx bx-layer nav__logo-icon'></i>
-                <span class="nav__logo-name">Bedimcode</span>
+                <span class="nav__logo-name">Infocal</span>
             </a>
 
             <div class="nav__list">
@@ -50,34 +50,34 @@
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-user nav__icon'></i>
-                    <span class="nav__name">Users</span>
+                    <span class="nav__name">Perfil</span>
                 </a>
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-message-square-detail nav__icon'></i>
-                    <span class="nav__name">Messages</span>
+                    <span class="nav__name">Mensajes</span>
                 </a>
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-bookmark nav__icon'></i>
-                    <span class="nav__name">Favorites</span>
+                    <span class="nav__name">Favoritos</span>
                 </a>
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-folder nav__icon'></i>
-                    <span class="nav__name">Data</span>
+                    <span class="nav__name">Datos</span>
                 </a>
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-bar-chart-alt-2 nav__icon'></i>
-                    <span class="nav__name">Analytics</span>
+                    <span class="nav__name">Gráficos</span>
                 </a>
             </div>
         </div>
 
         <a href="#" class="nav__link">
             <i class='bx bx-log-out nav__icon'></i>
-            <span class="nav__name">Log Out</span>
+            <span class="nav__name">Cerrar sesión</span>
         </a>
     </nav>
 </div>

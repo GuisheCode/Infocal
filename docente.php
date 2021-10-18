@@ -43,7 +43,7 @@ foreach($whereAndWhere as $index){
 // echo "</pre>";
 
 /***************** PARA ACTUALIZAR UNA TABLA ******************/
-$update = $seleccionTablaMaterias->where("idMaterias","=",1)->update(["materia"=>"BD","idDocente"=>1,"idCarrera"=>1]);
+// $update = $seleccionTablaMaterias->where("idMaterias","=",1)->update(["materia"=>"BD","idDocente"=>1,"idCarrera"=>1]);
 
 /***************** PARA ELIMINAR DATOS DE UNA TABLA ******************/
 $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
@@ -55,7 +55,7 @@ $delete = $seleccionTablaMaterias->where("idMaterias","=",4)->delete();
 ?>
 <div class="fila" id="fila">
     <br>
-    <h4 class="tituloDocente">Mis clases hoy</h4>
+    <h4 class="tituloDocente">Clases hoy - <?php echo date('l')." ".date('d') ." de ".date('F')." del ". date('Y') ?></h4>
     <hr>
     <?php
 
@@ -114,14 +114,7 @@ foreach ($selectAll as $key) {
             <h5 class="subTarjeta">Docente: <b><i><?php echo $valoresDocentes['nombre'] ?></i></b></h5>
             <h5 class="subTarjeta">Horario: <b><i><?php echo $key['horaInicio'] ?> -
                         <?php echo $key['horaFin'] ?></i></b></h5>
-            <h5 class="subTarjeta">Recurso(s):</h5>
-            <div class="recursos">
-                <?php foreach ($selectAllRecursos as $valoresRecursos) {?>
-                <?php echo "<div class='outer'><div class='divBtnRec'><p class='subTarjeta1'><b><i>- ".$valoresRecursos['recurso']."</i></b></p></div><div class='divBtnRec'><button type='button' id='abrirModal' onclick='capturarIdRecurso(".$valoresRecursos['idRecurso'].")'>Quitar</button></div></div>"?>
-                <?php
-					}
-					?></div>
-            <button type="button" id="abrirAgregar" onclick="capturarIdMateria(<?php echo $key['idMaterias']; ?>)">Agregar recurso</button>
+            
         </div>
     </div>
     <?php		
